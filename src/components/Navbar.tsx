@@ -14,7 +14,7 @@ const Navbar = () => {
     }
   };
   return (
-    <div className="flex items-center dark:bg-gray-800 justify-between">
+    <div className="flex items-center dark:bg-gray-900 justify-between">
       <img src={logo} alt="logo" className="w-[60px] h-[60px]" />
       <div className="p-2">
         <ColorModeSwitch />
