@@ -11,6 +11,7 @@ const GameCardContainer = ({ children }: Props) => {
   return (
     <div
       className="
+      min-h-[336px]
         rounded-xl
         overflow-hidden
         shadow-md
