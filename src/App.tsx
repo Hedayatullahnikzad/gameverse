@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import type { Genre } from "./hooks/useGenres";
+import PlatformSelector from "./components/PlatformSelector";
 
 function App() {
   // ✅ shared state (lifted up)
@@ -40,11 +41,15 @@ function App() {
 
       {/* Aside / Genre list (hidden on mobile) */}
       <aside className="hidden lg:block px-2">
-        <GenreList onSelectGenre={(genre) => setSelectedGenre(genre)} />
+        <GenreList
+          selectedGenre={selectedGenre}
+          onSelectGenre={(genre) => setSelectedGenre(genre)}
+        />
       </aside>
 
       {/* Main content */}
       <main>
+        <PlatformSelector />
         <GameGrid selectedGenre={selectedGenre} />
       </main>
     </div>
