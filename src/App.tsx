@@ -5,10 +5,16 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import type { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
-
+import type { Platform } from "./hooks/usePlatform";
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platform | null;
+}
 function App() {
-  // ✅ shared state (lifted up)
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [gameQuery, setGameQuery] = useState<GameQuery>({
+    genre: null,
+    platform: null,
+  });
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");
@@ -42,15 +48,21 @@ function App() {
       {/* Aside / Genre list (hidden on mobile) */}
       <aside className="hidden lg:block px-2">
         <GenreList
-          selectedGenre={selectedGenre}
-          onSelectGenre={(genre) => setSelectedGenre(genre)}
+          selectedGenre={gameQuery.genre}
+          onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
         />
       </aside>
 
       {/* Main content */}
       <main>
-        <PlatformSelector />
-        <GameGrid selectedGenre={selectedGenre} />
+        <PlatformSelector
+          selectedPlatform={gameQuery.platform}
+          onSelectPlatform={(platform) =>
+            setGameQuery({ ...gameQuery, platform })
+          }
+        />
+
+        <GameGrid gameQuery={gameQuery} />
       </main>
     </div>
   );

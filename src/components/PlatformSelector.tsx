@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import usePlatforms from "../hooks/usePlatform";
+import type { Platform } from "../hooks/usePlatform";
 
-const PlatformSelector = () => {
+interface Props {
+  selectedPlatform: Platform | null;
+  onSelectPlatform: (platform: Platform) => void;
+}
+
+const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
   const [open, setOpen] = useState(false);
   const { data: platforms, error } = usePlatforms();
+
   if (error) return null;
+
   return (
     <div className="relative inline-block text-left">
       {/* Button */}
@@ -14,7 +22,7 @@ const PlatformSelector = () => {
         className="flex items-center gap-2 rounded-md border border-gray-300 px-4 py-2 text-sm font-medium
                    hover:bg-gray-100 dark:border-gray-600 dark:text-white dark:hover:bg-gray-700"
       >
-        Platform
+        {selectedPlatform ? selectedPlatform.name : "Platform"}
         <BsChevronDown className="text-gray-500" />
       </button>
 
@@ -28,7 +36,11 @@ const PlatformSelector = () => {
             {platforms?.map((platform) => (
               <li
                 key={platform.id}
-                className="cursor-pointer px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={() => {
+                  onSelectPlatform(platform);
+                  setOpen(false);
+                }}
+                className="cursor-pointer px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 {platform.name}
               </li>
