@@ -26,6 +26,7 @@ const useGames = (gameQuery: GameQuery) => {
 
         // 🎯 filter games by PARENT platform (PC / PlayStation / Xbox)
         parent_platforms: gameQuery.platform?.id,
+        ordering: gameQuery.sortOrder
       },
     },
     [

@@ -1,9 +1,9 @@
 import useGames from "../hooks/useGames";
-import type { Genre } from "../hooks/useGenres";
+// import type { Genre } from "../hooks/useGenres";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
-import type { Platform } from "../hooks/usePlatform";
+// import type { Platform } from "../hooks/usePlatform";
 import type { GameQuery } from "../App";
 interface Props {
   gameQuery: GameQuery;
