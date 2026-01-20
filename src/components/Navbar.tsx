@@ -1,5 +1,6 @@
 import logo from "../assets/logo.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
+import SearchInput from "./SearchInput ";
 const Navbar = () => {
   const toggleTheme = () => {
     const html = document.documentElement;
@@ -14,10 +15,23 @@ const Navbar = () => {
     }
   };
   return (
-    <div className="flex items-center dark:bg-gray-900 justify-between">
-      <img src={logo} alt="logo" className="w-[60px] h-[60px]" />
-      <div className="p-2">
-        <ColorModeSwitch />
+    <div className="w-full dark:bg-gray-900 py-2">
+      <div className="flex items-center">
+        {/* Logo */}
+        <img
+          src={logo}
+          alt="logo"
+          className="w-[48px] h-[48px] flex-shrink-0"
+        />
+
+        {/* Search input (NO margin, NO gap) */}
+        <div className="flex-1">
+          <SearchInput />
+        </div>
+
+        <div className="mr-2 ml-2">
+          <ColorModeSwitch />
+        </div>
       </div>
     </div>
   );
