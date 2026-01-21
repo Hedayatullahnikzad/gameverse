@@ -19,35 +19,39 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   }
 
   return (
-    <ul>
-      {data.map((genre) => (
-        <li key={genre.id} className="py-[5px]">
-          <div className="flex items-center gap-3">
-            {/* Genre image */}
-            <img
-              src={getCroppedImageUrl(genre.image_background)}
-              alt={genre.name}
-              className="w-8 h-8 rounded-lg object-cover"
-            />
-
-            {/* Genre button */}
-            <button
-              type="button"
-              onClick={() => onSelectGenre(genre)}
-              className={`text-lg bg-transparent p-0 text-left hover:underline
-            ${
-              selectedGenre?.id === genre.id
-                ? "font-bold text-blue-600"
-                : "text-gray-700 dark:text-gray-300"
-            }
-          `}
-            >
-              {genre.name}
-            </button>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <h2 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+        Genres
+      </h2>
+      <ul>
+        {data.map((genre) => (
+          <li key={genre.id} className="py-[5px]">
+            <div className="flex items-center gap-3">
+              {/* Genre image */}
+              <img
+                src={getCroppedImageUrl(genre.image_background)}
+                alt={genre.name}
+                className="w-8 h-8 rounded-lg object-cover"
+              />
+              {/* Genre button */}
+              <button
+                type="button"
+                onClick={() => onSelectGenre(genre)}
+                className={`text-lg bg-transparent p-0 text-left hover:underline
+              ${
+                selectedGenre?.id === genre.id
+                  ? "font-bold text-blue-600"
+                  : "text-gray-700 dark:text-gray-300"
+              }
+            `}
+              >
+                {genre.name}
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
