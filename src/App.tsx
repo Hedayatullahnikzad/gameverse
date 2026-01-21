@@ -11,12 +11,14 @@ export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   sortOrder: string;
+  searchText: string;
 }
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({
     genre: null,
     platform: null,
     sortOrder: "",
+    searchText: "",
   });
 
   useEffect(() => {
@@ -45,7 +47,9 @@ function App() {
     >
       {/* Navbar (always full width) */}
       <div className="col-span-1 lg:col-span-2">
-        <Navbar />
+        <Navbar
+          onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
+        />
       </div>
 
       {/* Aside / Genre list (hidden on mobile) */}

@@ -1,36 +1,28 @@
-// interface Props {
-//   onSearch: (searchText: string) => void;
-// }
-
 import { BsSearch } from "react-icons/bs";
+import { useRef } from "react";
 
-const SearchInput = () => {
+interface Props {
+  onSearch: (searchText: string) => void;
+}
+
+const SearchInput = ({ onSearch }: Props) => {
+  const searchRef = useRef<HTMLInputElement>(null);
+
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
+        if (searchRef.current) onSearch(searchRef.current.value);
       }}
       className="w-full ml-1"
     >
-      {/* 🔹 InputGroup equivalent */}
       <div className="relative w-full">
-        {/* 🔍 Icon (InputLeftElement equivalent) */}
-        <span
-          className="
-            absolute
-            left-4
-            top-1/2
-            -translate-y-1/2
-            text-gray-500
-            dark:text-gray-400
-            pointer-events-none
-          "
-        >
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 pointer-events-none">
           <BsSearch />
         </span>
 
-        {/* 🔎 Input */}
         <input
+          ref={searchRef}
           name="search"
           type="text"
           placeholder="Search games..."

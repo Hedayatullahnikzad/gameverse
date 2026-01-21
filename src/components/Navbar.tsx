@@ -1,7 +1,10 @@
 import logo from "../assets/logo.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput ";
-const Navbar = () => {
+interface Props {
+  onSearch: (searchText: string) => void;
+}
+const Navbar = ({ onSearch }: Props) => {
   const toggleTheme = () => {
     const html = document.documentElement;
     const isDark = html.classList.contains("dark");
@@ -26,7 +29,7 @@ const Navbar = () => {
 
         {/* Search input (NO margin, NO gap) */}
         <div className="flex-1">
-          <SearchInput />
+          <SearchInput onSearch={onSearch} />
         </div>
 
         <div className="mr-2 ml-2">
