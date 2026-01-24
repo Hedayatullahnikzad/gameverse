@@ -1,5 +1,4 @@
 import type { Game } from "../hooks/useGames";
-import getCroppedImageUrl from "../services/image-url";
 import CriticScore from "./CriticScore";
 import PlatformIconList from "./PlatformIconList";
 
@@ -18,11 +17,7 @@ const GameCard = ({ game }: Props) => {
 
       {/* Card body */}
       <div className="p-4 space-y-2">
-        {/* Game title */}
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-          {game.name}
-        </h2>
-
+        {" "}
         {/* Platforms + Critic Score */}
         <div className="flex items-center justify-between">
           <PlatformIconList
@@ -30,6 +25,10 @@ const GameCard = ({ game }: Props) => {
           />
           <CriticScore score={game.metacritic} />
         </div>
+        {/* Game title */}
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+          {game.name}
+        </h2>
       </div>
     </>
   );
