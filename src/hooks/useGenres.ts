@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "../services/api-client";
 import genres from "../data/genres";
+import type { FetchResponse } from "../services/api-client";
 
 export interface Genre {
   id: number;
@@ -8,10 +9,7 @@ export interface Genre {
 image_background: string | null;
 }
 
-interface FetchResponse<T> {
-  count: number;
-  results: T[];
-}
+
 
 
 const fetchGenres = async (): Promise<FetchResponse<Genre>> => {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
-import usePlatforms from "../hooks/usePlatform";
-import type { Platform } from "../hooks/usePlatform";
+import usePlatforms from "../hooks/usePlatforms";
+import type { Platform } from "../hooks/usePlatforms";
 
 interface Props {
   selectedPlatform: Platform | null;
@@ -64,7 +64,7 @@ const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
           "
         >
           <ul className="py-1">
-            {platforms?.map((platform) => (
+            {platforms?.results.map((platform) => (
               <li
                 key={platform.id}
                 onClick={() => {
