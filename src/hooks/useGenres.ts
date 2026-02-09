@@ -24,7 +24,7 @@ const useGenres = () => {
     queryKey: ["genres"],
     queryFn: fetchGenres,
     staleTime: 24 * 60 * 60 * 1000,
-    initialData: {
+    placeholderData: {
       count: genres.length,
       results: genres,
     },
