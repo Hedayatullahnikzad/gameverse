@@ -53,7 +53,7 @@ const SortSelector = ({ sortOrder, onSelectSortOrder }: Props) => {
         {/* Always visible value */}
         <span>{currentSortOrder.label}</span>
 
-        <BsChevronDown className="shrink-0" />
+        <BsChevronDown className="shrink-0 text-gray-500 dark:text-gray-300" />
       </button>
 
       {/* Dropdown */}
@@ -84,13 +84,15 @@ const SortSelector = ({ sortOrder, onSelectSortOrder }: Props) => {
                   setOpen(false);
                 }}
                 className="
-                  cursor-pointer
-                  px-4
-                  py-2
-                  text-sm
-                  hover:bg-gray-100
-                  dark:hover:bg-gray-700
-                "
+        cursor-pointer
+        px-4
+        py-2
+        text-sm
+        text-gray-900
+        dark:text-gray-200
+        hover:bg-gray-100
+        dark:hover:bg-gray-700
+      "
               >
                 {order.label}
               </li>

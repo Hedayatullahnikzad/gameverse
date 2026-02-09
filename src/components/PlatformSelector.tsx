@@ -20,7 +20,7 @@ const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
   );
 
   return (
-    <div className="relative inline-block text-left w-full sm:w-auto">
+    <div className="relative inline-block text-left w-full sm:w-auto ">
       {/* Button */}
       <button
         onClick={() => setOpen(!open)}
@@ -81,6 +81,8 @@ const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
                   px-4
                   py-2
                   text-sm
+                  text-gray-900
+                  dark:text-gray-200
                   hover:bg-gray-100
                   dark:hover:bg-gray-700
                 "
