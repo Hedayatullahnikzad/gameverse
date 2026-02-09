@@ -3,53 +3,33 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
-import type { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
-import type { Platform } from "./hooks/usePlatforms";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
 
 export interface GameQuery {
-  genre: Genre | null;
-  platform: Platform | null;
+  genreId?: number;
+  genreName?: string; // ✅ UI only
+  platformId?: number;
   sortOrder: string;
-  searchText: string;
+  platformName?: string; // ✅ UI only
+  searchText?: string;
 }
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({
-    genre: null,
-    platform: null,
     sortOrder: "",
-    searchText: "",
   });
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");
-
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    document.documentElement.classList.toggle("dark", theme === "dark");
   }, []);
 
   return (
-    <div
-      className="
-        grid
-        grid-rows-[auto_1fr]
-        grid-cols-1
-        lg:grid-cols-[200px_1fr]
-        bg-white
-        dark:bg-gray-900
-        text-black
-        dark:text-white
-        min-h-screen
-      "
-    >
+    <div className="grid grid-rows-[auto_1fr] lg:grid-cols-[200px_1fr] min-h-screen bg-white dark:bg-gray-900">
       {/* Navbar */}
-      <div className="col-span-1 lg:col-span-2">
+      <div className="lg:col-span-2">
         <Navbar
           onSearch={(searchText) =>
             setGameQuery((prev) => ({ ...prev, searchText }))
@@ -57,26 +37,34 @@ function App() {
         />
       </div>
 
-      {/* Genre List */}
+      {/* Genre list */}
       <aside className="hidden lg:block px-2">
         <GenreList
-          selectedGenre={gameQuery.genre}
+          selectedGenreId={gameQuery.genreId}
           onSelectGenre={(genre) =>
-            setGameQuery((prev) => ({ ...prev, genre }))
+            setGameQuery((prev) => ({
+              ...prev,
+              genreId: genre.id,
+              genreName: genre.name, // ✅ instant
+            }))
           }
         />
       </aside>
 
-      {/* Main Content */}
+      {/* Main */}
       <main>
         <div className="pl-2">
           <GameHeading gameQuery={gameQuery} />
 
-          <div className="flex items-center gap-5 mb-5">
+          <div className="flex gap-5 mb-5">
             <PlatformSelector
-              selectedPlatform={gameQuery.platform}
+              selectedPlatformId={gameQuery.platformId}
               onSelectPlatform={(platform) =>
-                setGameQuery((prev) => ({ ...prev, platform }))
+                setGameQuery((prev) => ({
+                  ...prev,
+                  platformId: platform.id,
+                  platformName: platform.name, // ✅ instant
+                }))
               }
             />
 

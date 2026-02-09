@@ -1,14 +1,13 @@
-import useGenres from "../hooks/useGenres";
+import useGenres, { type Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 import genres from "../data/genres"; // ✅ fallback
-import type { Genre } from "../hooks/useGenres";
 
 interface Props {
-  selectedGenre: Genre | null;
+  selectedGenreId?: number;
   onSelectGenre: (genre: Genre) => void;
 }
 
-const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
+const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
   const { data, isFetching } = useGenres();
 
   // ✅ ALWAYS have genres
@@ -40,7 +39,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                 onClick={() => onSelectGenre(genre)}
                 className={`text-lg bg-transparent p-0 text-left hover:underline
                   ${
-                    selectedGenre?.id === genre.id
+                    selectedGenreId === genre.id
                       ? "font-bold text-blue-600"
                       : "text-gray-700 dark:text-gray-300"
                   }

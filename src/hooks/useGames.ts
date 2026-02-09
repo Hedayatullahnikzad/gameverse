@@ -16,20 +16,24 @@ const PAGE_SIZE = 20;
 
 const useGames = (gameQuery: GameQuery) =>
   useInfiniteQuery<FetchResponse<Game>, Error>({
+    // ✅ clean & stable query key
     queryKey: ["games", gameQuery],
 
     initialPageParam: 1,
 
     queryFn: ({ pageParam }) =>
       gamesApiClient.getAll({
-        page: pageParam as number, // ✅ cast here
+        page: pageParam as number,
         page_size: PAGE_SIZE,
-        genres: gameQuery.genre?.id,
-        parent_platforms: gameQuery.platform?.id,
+
+        // ✅ simplified filters
+        genres: gameQuery.genreId,
+        parent_platforms: gameQuery.platformId,
         ordering: gameQuery.sortOrder,
         search: gameQuery.searchText,
       }),
 
+    // ✅ pagination logic stays the same
     getNextPageParam: (lastPage, allPages) => {
       const fetchedItems = allPages.reduce(
         (total, page) => total + page.results.length,

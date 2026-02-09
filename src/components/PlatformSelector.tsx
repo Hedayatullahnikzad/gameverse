@@ -1,18 +1,23 @@
 import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
-import usePlatforms from "../hooks/usePlatforms";
-import type { Platform } from "../hooks/usePlatforms";
+import usePlatforms, { type Platform } from "../hooks/usePlatforms";
 
 interface Props {
-  selectedPlatform: Platform | null;
+  selectedPlatformId?: number;
   onSelectPlatform: (platform: Platform) => void;
 }
 
-const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
+const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
   const [open, setOpen] = useState(false);
-  const { data: platforms, error } = usePlatforms();
+  const { data, error } = usePlatforms();
 
   if (error) return null;
+
+  const platforms = data?.results ?? [];
+
+  const selectedPlatform = platforms.find(
+    (platform) => platform.id === selectedPlatformId,
+  );
 
   return (
     <div className="relative inline-block text-left w-full sm:w-auto">
@@ -40,7 +45,7 @@ const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
           sm:text-sm
         "
       >
-        <span>{selectedPlatform ? selectedPlatform.name : "Platform"}</span>
+        <span>{selectedPlatform?.name ?? "Platform"}</span>
         <BsChevronDown className="shrink-0 text-gray-500" />
       </button>
 
@@ -64,7 +69,7 @@ const PlatformSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
           "
         >
           <ul className="py-1">
-            {platforms?.results.map((platform) => (
+            {platforms.map((platform) => (
               <li
                 key={platform.id}
                 onClick={() => {
