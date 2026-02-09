@@ -1,6 +1,6 @@
 // src/hooks/usePlatforms.ts
 import { useQuery } from "@tanstack/react-query";
-import platformService from "../services/platformService";
+import { ApiClient, type FetchResponse } from "../services/api-client";
 import platforms from "../data/platform";
 
 export interface Platform {
@@ -9,14 +9,18 @@ export interface Platform {
   slug: string;
 }
 
+const platformApiClient = new ApiClient<Platform>("/platforms/lists/parents");
+
 const usePlatforms = () =>
-  useQuery({
+  useQuery<FetchResponse<Platform>>({
     queryKey: ["platforms"],
-    queryFn: platformService.getAll,
+    queryFn: platformApiClient.getAll,
     initialData: {
+      count: platforms.length,
       results: platforms,
     },
     staleTime: 1000 * 60 * 60 * 24, // 24 hours
+    
   });
 
 export default usePlatforms;

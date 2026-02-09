@@ -8,12 +8,14 @@ import PlatformSelector from "./components/PlatformSelector";
 import type { Platform } from "./hooks/usePlatforms";
 import SortSelector from "./components/SortSelector";
 import GameHeading from "./components/GameHeading";
+
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   sortOrder: string;
   searchText: string;
 }
+
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({
     genre: null,
@@ -46,40 +48,47 @@ function App() {
         min-h-screen
       "
     >
-      {/* Navbar (always full width) */}
+      {/* Navbar */}
       <div className="col-span-1 lg:col-span-2">
         <Navbar
-          onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })}
+          onSearch={(searchText) =>
+            setGameQuery((prev) => ({ ...prev, searchText }))
+          }
         />
       </div>
 
-      {/* Aside / Genre list (hidden on mobile) */}
+      {/* Genre List */}
       <aside className="hidden lg:block px-2">
         <GenreList
           selectedGenre={gameQuery.genre}
-          onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+          onSelectGenre={(genre) =>
+            setGameQuery((prev) => ({ ...prev, genre }))
+          }
         />
       </aside>
 
-      {/* Main content */}
+      {/* Main Content */}
       <main>
         <div className="pl-2">
           <GameHeading gameQuery={gameQuery} />
+
           <div className="flex items-center gap-5 mb-5">
             <PlatformSelector
               selectedPlatform={gameQuery.platform}
               onSelectPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platform })
+                setGameQuery((prev) => ({ ...prev, platform }))
               }
             />
+
             <SortSelector
-              onSelectSortOrder={(sortOrder) =>
-                setGameQuery({ ...gameQuery, sortOrder })
-              }
               sortOrder={gameQuery.sortOrder}
+              onSelectSortOrder={(sortOrder) =>
+                setGameQuery((prev) => ({ ...prev, sortOrder }))
+              }
             />
           </div>
         </div>
+
         <GameGrid gameQuery={gameQuery} />
       </main>
     </div>
