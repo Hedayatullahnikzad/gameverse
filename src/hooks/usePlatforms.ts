@@ -1,5 +1,6 @@
 // src/hooks/usePlatforms.ts
 import { useQuery } from "@tanstack/react-query";
+import ms from "ms";
 import platforms from "../data/platform";
 import { ApiClient, type FetchResponse } from "../services/api-client";
 
@@ -19,7 +20,7 @@ const usePlatforms = () =>
       count: platforms.length,
       results: platforms,
     },
-    staleTime: 1000 * 60 * 60 * 24, // 24 hours
+    staleTime: ms('24h')
     
   });
 
