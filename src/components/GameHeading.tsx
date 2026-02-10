@@ -1,11 +1,15 @@
+import usePlatform from "../hooks/usePlatform";
 import type { GameQuery } from "../App";
+import useGenre from "../hooks/useGenre";
 
 interface Props {
   gameQuery: GameQuery;
 }
 
 const GameHeading = ({ gameQuery }: Props) => {
-  const heading = `${gameQuery.platformName ?? ""} ${
+  const platform = usePlatform(gameQuery.platformId);
+  const genre = useGenre(gameQuery.genreId);
+  const heading = `${platform?.name ?? ""} ${
     gameQuery.genreName ?? ""
   } Games`.trim();
 

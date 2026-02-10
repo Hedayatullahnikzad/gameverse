@@ -1,7 +1,7 @@
 // src/hooks/usePlatforms.ts
 import { useQuery } from "@tanstack/react-query";
-import { ApiClient, type FetchResponse } from "../services/api-client";
 import platforms from "../data/platform";
+import { ApiClient, type FetchResponse } from "../services/api-client";
 
 export interface Platform {
   id: number;

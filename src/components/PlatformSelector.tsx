@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import usePlatforms, { type Platform } from "../hooks/usePlatforms";
+import usePlatform from "../hooks/usePlatform";
 
 interface Props {
   selectedPlatformId?: number;
@@ -15,9 +16,7 @@ const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
 
   const platforms = data?.results ?? [];
 
-  const selectedPlatform = platforms.find(
-    (platform) => platform.id === selectedPlatformId,
-  );
+  const selectedPlatform = usePlatform(selectedPlatformId);
 
   return (
     <div className="relative inline-block text-left w-full sm:w-auto ">

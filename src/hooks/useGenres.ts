@@ -19,6 +19,7 @@ const useGenres = () =>
   previousData ?? {
     count: genres.length,
     results: genres,
+
   },
 
   });
