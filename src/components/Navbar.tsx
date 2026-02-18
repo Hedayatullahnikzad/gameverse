@@ -2,7 +2,7 @@ import logo from "../assets/logo.webp";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput ";
 interface Props {
-  onSearch: (searchText: string) => void;
+  onSearch?: (searchText: string) => void;
 }
 const Navbar = ({ onSearch }: Props) => {
   return (
@@ -17,7 +17,7 @@ const Navbar = ({ onSearch }: Props) => {
 
         {/* Search input (NO margin, NO gap) */}
         <div className="flex-1">
-          <SearchInput onSearch={onSearch} />
+          <SearchInput onSearch={onSearch ?? (() => {})} />
         </div>
 
         <div className="mr-2 ml-2">

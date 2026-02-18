@@ -2,7 +2,7 @@ import { BsSearch } from "react-icons/bs";
 import { useRef } from "react";
 
 interface Props {
-  onSearch: (searchText: string) => void;
+  onSearch?: (searchText: string) => void;
 }
 
 const SearchInput = ({ onSearch }: Props) => {
@@ -12,7 +12,7 @@ const SearchInput = ({ onSearch }: Props) => {
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        if (searchRef.current) onSearch(searchRef.current.value);
+        if (searchRef.current) onSearch?.(searchRef.current.value);
       }}
       className="w-full ml-1"
     >
