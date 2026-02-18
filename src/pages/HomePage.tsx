@@ -3,7 +3,7 @@ import GameGrid from "../components/GameGrid";
 import GameHeading from "../components/GameHeading";
 import PlatformSelector from "../components/PlatformSelector";
 import SortSelector from "../components/SortSelector";
-import type { GameQuery } from "./Layout";
+import type { GameQuery } from "./MainLayout";
 
 interface ContextType {
   gameQuery: GameQuery;

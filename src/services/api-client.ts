@@ -36,6 +36,13 @@ export class ApiClient<T> {
       .get<FetchResponse<T>>(this.endpoint, { params })
       .then(res => res.data);
   }
+
+  // ✅ Fetch single object (game by slug or id)
+  get(idOrSlug: string | number) {
+    return axiosInstance
+      .get<T>(`${this.endpoint}/${idOrSlug}`)
+      .then(res => res.data);
+  }
 }
 
 export default axiosInstance;

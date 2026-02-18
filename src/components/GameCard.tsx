@@ -2,6 +2,7 @@ import type { Game } from "../hooks/useGames";
 import CriticScore from "./CriticScore";
 import PlatformIconList from "./PlatformIconList";
 import getCroppedImageUrl from "../services/image-url";
+import { Link } from "react-router-dom";
 
 interface Props {
   game: Game;
@@ -30,7 +31,7 @@ const GameCard = ({ game }: Props) => {
 
         {/* Game title */}
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-          {game.name}
+          <Link to={"/games/" + game.slug}>{game.name}</Link>
         </h2>
       </div>
     </>
