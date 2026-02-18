@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import GameDetailsPage from "./pages/GameDetailsPage.tsx";
 import GameLayout from "./pages/GameLayout.tsx";
-import HomePage from "./pages/Homepage.tsx";
+import HomePage from "./pages/HomePage.tsx";
 import MainLayout from "./pages/MainLayout.tsx";
 
 const router = createBrowserRouter([
