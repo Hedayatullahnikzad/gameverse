@@ -1,9 +1,9 @@
 import InfiniteScroll from "react-infinite-scroll-component";
+import type { GameQuery } from "../pages/MainLayout";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
-import type { GameQuery } from "../App";
 
 interface Props {
   gameQuery: GameQuery;

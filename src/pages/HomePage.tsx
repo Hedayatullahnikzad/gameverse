@@ -10,7 +10,7 @@ interface ContextType {
   setGameQuery: React.Dispatch<React.SetStateAction<GameQuery>>;
 }
 
-const Homepage = () => {
+const HomePage = () => {
   const { gameQuery, setGameQuery } = useOutletContext<ContextType>();
 
   return (
@@ -42,4 +42,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default HomePage;

@@ -1,5 +1,4 @@
 import usePlatforms from "./usePlatforms";
-import type { Platform } from "./usePlatforms";
 
 const usePlatform = (platformId?: number) => {
   const { data } = usePlatforms();
