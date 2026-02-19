@@ -2,18 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import ms from "ms";
 import type { GameQuery } from "../pages/MainLayout";
 import { ApiClient, type FetchResponse } from "../services/api-client";
-import type { Platform } from "./usePlatforms";
-
-export interface Game {
-  id: number;
-  name: string;
-  slug: string;
-  description_raw: string;
-  background_image: string;
-  parent_platforms: { platform: Platform }[];
-  metacritic: number;
-  
-}
+import type { Game } from "../entities/Game";
 
 const gamesApiClient = new ApiClient<Game>("/games");
 const PAGE_SIZE = 20;

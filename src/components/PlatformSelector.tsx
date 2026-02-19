@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
-import usePlatforms, { type Platform } from "../hooks/usePlatforms";
+import usePlatforms from "../hooks/usePlatforms";
+import { type Platform } from "../entities/Platform";
 import usePlatform from "../hooks/usePlatform";
 
 interface Props {
