@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import useGame from "../hooks/useGame";
+import ExpandableText from "../components/ExpandableText";
+import GameAttributes from "../components/GameAttributes";
 
 const GameDetailsPage = () => {
   const { slug } = useParams();
@@ -16,14 +18,14 @@ const GameDetailsPage = () => {
 
   if (isLoading)
     return (
-      <div className="min-h-screen flex items-center justify-center text-xl">
+      <div className="min-h-screen flex items-center justify-center text-xl dark:text-white">
         Loading...
       </div>
     );
 
   if (error)
     return (
-      <div className="min-h-screen flex items-center justify-center text-red-500">
+      <div className="min-h-screen flex items-center justify-center text-red-500 dark:text-white">
         Failed to load game.
       </div>
     );
@@ -35,13 +37,8 @@ const GameDetailsPage = () => {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-6">{game.name}</h1>
 
-        <img
-          src={game.background_image}
-          alt={game.name}
-          className="rounded-xl mb-6 w-full"
-        />
-
-        <p className="text-lg leading-relaxed">{game.description_raw}</p>
+        <ExpandableText text={game.description_raw} maxChars={400} />
+        <GameAttributes game={game} />
       </div>
     </div>
   );
