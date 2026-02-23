@@ -12,6 +12,6 @@ export interface Game {
 
   metacritic: number;
 
-  genres: { id: number; name: string }[];   // ✅ added
-  publishers: Publisher[];                  // ✅ added
+  genres: { id: number; name: string }[];
+  publishers: Publisher[];           
 }
