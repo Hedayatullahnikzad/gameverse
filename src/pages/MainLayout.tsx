@@ -30,11 +30,7 @@ const Layout = () => {
     >
       {/* Navbar */}
       <div className={!isGameDetailsPage ? "lg:col-span-2" : ""}>
-        <Navbar
-          onSearch={(searchText) =>
-            setGameQuery((prev) => ({ ...prev, searchText }))
-          }
-        />
+        <Navbar />
       </div>
 
       {/* Sidebar (hidden on GameDetailsPage) */}

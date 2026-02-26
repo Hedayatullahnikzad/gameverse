@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useSearchParams } from "react-router-dom";
 import GameGrid from "../components/GameGrid";
 import GameHeading from "../components/GameHeading";
 import PlatformSelector from "../components/PlatformSelector";
@@ -12,14 +12,22 @@ interface ContextType {
 
 const HomePage = () => {
   const { gameQuery, setGameQuery } = useOutletContext<ContextType>();
+  const [searchParams] = useSearchParams();
+
+  const searchTextFromURL = searchParams.get("search") || undefined;
+
+  const mergedGameQuery: GameQuery = {
+    ...gameQuery,
+    searchText: searchTextFromURL,
+  };
 
   return (
     <div className="pl-2">
-      <GameHeading gameQuery={gameQuery} />
+      <GameHeading gameQuery={mergedGameQuery} />
 
       <div className="flex gap-5 mb-5">
         <PlatformSelector
-          selectedPlatformId={gameQuery.platformId}
+          selectedPlatformId={mergedGameQuery.platformId}
           onSelectPlatform={(platform) =>
             setGameQuery((prev) => ({
               ...prev,
@@ -30,14 +38,14 @@ const HomePage = () => {
         />
 
         <SortSelector
-          sortOrder={gameQuery.sortOrder}
+          sortOrder={mergedGameQuery.sortOrder}
           onSelectSortOrder={(sortOrder) =>
             setGameQuery((prev) => ({ ...prev, sortOrder }))
           }
         />
       </div>
 
-      <GameGrid gameQuery={gameQuery} />
+      <GameGrid gameQuery={mergedGameQuery} />
     </div>
   );
 };

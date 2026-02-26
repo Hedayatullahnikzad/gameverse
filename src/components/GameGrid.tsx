@@ -10,6 +10,7 @@ interface Props {
 }
 
 const GameGrid = ({ gameQuery }: Props) => {
+  console.log("GameQuery:", gameQuery);
   const { data, error, isLoading, fetchNextPage, hasNextPage } =
     useGames(gameQuery);
 

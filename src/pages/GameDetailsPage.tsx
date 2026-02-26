@@ -36,13 +36,26 @@ const GameDetailsPage = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 px-8 py-10">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6">{game.name}</h1>
+      <div className="max-w-6xl mx-auto">
+        {/* Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+          {/* LEFT COLUMN */}
+          <div>
+            <h1 className="text-4xl font-bold mb-6">{game.name}</h1>
 
-        <ExpandableText text={game.description_raw} maxChars={400} />
-        <GameAttributes game={game} />
-        <GameTrailers gameId={game.id} />
-        <GameScreenshots gameId={game.id} />
+            <ExpandableText text={game.description_raw} maxChars={400} />
+
+            <div className="mt-6">
+              <GameAttributes game={game} />
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN */}
+          <div className="space-y-8">
+            <GameTrailers gameId={game.id} />
+            <GameScreenshots gameId={game.id} />
+          </div>
+        </div>
       </div>
     </div>
   );
