@@ -1,17 +1,16 @@
 import useGenres from "../hooks/useGenres";
-import { type Genre } from "../entities/Genre";
+import { useGameQueryStore } from "../store/useGameQueryStore";
 import getCroppedImageUrl from "../services/image-url";
-import genres from "../data/genres"; // ✅ fallback
+import genres from "../data/genres";
 
-interface Props {
-  selectedGenreId?: number;
-  onSelectGenre: (genre: Genre) => void;
-}
+const GenreList = () => {
+  const { data } = useGenres();
 
-const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
-  const { data, isFetching } = useGenres();
+  // ✅ Subscribe only to what we need
+  const genreId = useGameQueryStore((state) => state.gameQuery.genreId);
 
-  // ✅ ALWAYS have genres
+  const setGenre = useGameQueryStore((state) => state.setGenre);
+
   const genreList = data?.results ?? genres;
 
   return (
@@ -19,11 +18,6 @@ const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
       <h2 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
         Genres
       </h2>
-
-      {/* Optional background indicator */}
-      {isFetching && (
-        <div className="text-xs text-gray-400 mb-2">Updating…</div>
-      )}
 
       <ul>
         {genreList.map((genre) => (
@@ -36,15 +30,21 @@ const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
               />
 
               <button
-                type="button"
-                onClick={() => onSelectGenre(genre)}
-                className={`text-lg bg-transparent p-0 text-left hover:underline
-                  ${
-                    selectedGenreId === genre.id
-                      ? "font-bold text-blue-600"
-                      : "text-gray-700 dark:text-gray-300"
-                  }
-                `}
+                onClick={() => setGenre(genre.id, genre.name)}
+                className={`
+    w-full
+    text-left
+    text-lg
+    leading-tight
+    break-words
+    bg-transparent
+    hover:underline
+    ${
+      genreId === genre.id
+        ? "font-bold text-blue-600"
+        : "text-gray-700 dark:text-gray-300"
+    }
+  `}
               >
                 {genre.name}
               </button>

@@ -1,13 +1,14 @@
 import { useState } from "react";
+import { useGameQueryStore } from "../store/useGameQueryStore";
 import { BsChevronDown } from "react-icons/bs";
 
-interface Props {
-  sortOrder: string;
-  onSelectSortOrder: (sortOrder: string) => void;
-}
-
-const SortSelector = ({ sortOrder, onSelectSortOrder }: Props) => {
+const SortSelector = () => {
   const [open, setOpen] = useState(false);
+
+  // ✅ Subscribe only to what we need
+  const sortOrder = useGameQueryStore((state) => state.gameQuery.sortOrder);
+
+  const setSortOrder = useGameQueryStore((state) => state.setSortOrder);
 
   const sortOrders = [
     { label: "Relevance", value: "" },
@@ -18,8 +19,8 @@ const SortSelector = ({ sortOrder, onSelectSortOrder }: Props) => {
     { label: "Average rating", value: "-metacritic" },
   ];
 
-  const currentSortOrder =
-    sortOrders.find((order) => order.value === sortOrder) ?? sortOrders[0];
+  const current =
+    sortOrders.find((o) => o.value === sortOrder) ?? sortOrders[0];
 
   return (
     <div className="relative inline-block text-left w-full sm:w-auto">
@@ -39,20 +40,19 @@ const SortSelector = ({ sortOrder, onSelectSortOrder }: Props) => {
           py-2
           text-xs
           font-medium
+          text-gray-900
+          bg-white
           hover:bg-gray-100
           dark:border-gray-600
           dark:text-white
+          dark:bg-gray-800
           dark:hover:bg-gray-700
           sm:px-4
           sm:text-sm
         "
       >
-        {/* Desktop label */}
         <span className="hidden sm:inline">Order by:</span>
-
-        {/* Always visible value */}
-        <span>{currentSortOrder.label}</span>
-
+        <span>{current.label}</span>
         <BsChevronDown className="shrink-0 text-gray-500 dark:text-gray-300" />
       </button>
 
@@ -65,7 +65,7 @@ const SortSelector = ({ sortOrder, onSelectSortOrder }: Props) => {
             z-10
             mt-2
             w-full
-            sm:w-48
+            sm:w-56
             rounded-md
             border
             border-gray-200
@@ -80,19 +80,19 @@ const SortSelector = ({ sortOrder, onSelectSortOrder }: Props) => {
               <li
                 key={order.label}
                 onClick={() => {
-                  onSelectSortOrder(order.value);
+                  setSortOrder(order.value);
                   setOpen(false);
                 }}
                 className="
-        cursor-pointer
-        px-4
-        py-2
-        text-sm
-        text-gray-900
-        dark:text-gray-200
-        hover:bg-gray-100
-        dark:hover:bg-gray-700
-      "
+                  cursor-pointer
+                  px-4
+                  py-2
+                  text-sm
+                  text-gray-900
+                  dark:text-gray-200
+                  hover:bg-gray-100
+                  dark:hover:bg-gray-700
+                "
               >
                 {order.label}
               </li>

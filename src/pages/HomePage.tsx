@@ -1,51 +1,30 @@
-import { useOutletContext, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import GameGrid from "../components/GameGrid";
 import GameHeading from "../components/GameHeading";
 import PlatformSelector from "../components/PlatformSelector";
 import SortSelector from "../components/SortSelector";
-import type { GameQuery } from "./MainLayout";
-
-interface ContextType {
-  gameQuery: GameQuery;
-  setGameQuery: React.Dispatch<React.SetStateAction<GameQuery>>;
-}
+import { useGameQueryStore } from "../store/useGameQueryStore";
+import { useEffect } from "react";
 
 const HomePage = () => {
-  const { gameQuery, setGameQuery } = useOutletContext<ContextType>();
+  const { setSearchText } = useGameQueryStore();
   const [searchParams] = useSearchParams();
 
-  const searchTextFromURL = searchParams.get("search") || undefined;
-
-  const mergedGameQuery: GameQuery = {
-    ...gameQuery,
-    searchText: searchTextFromURL,
-  };
+  useEffect(() => {
+    const searchTextFromURL = searchParams.get("search") || undefined;
+    setSearchText(searchTextFromURL);
+  }, [searchParams, setSearchText]);
 
   return (
     <div className="pl-2">
-      <GameHeading gameQuery={mergedGameQuery} />
+      <GameHeading />
 
       <div className="flex gap-5 mb-5">
-        <PlatformSelector
-          selectedPlatformId={mergedGameQuery.platformId}
-          onSelectPlatform={(platform) =>
-            setGameQuery((prev) => ({
-              ...prev,
-              platformId: platform.id,
-              platformName: platform.name,
-            }))
-          }
-        />
-
-        <SortSelector
-          sortOrder={mergedGameQuery.sortOrder}
-          onSelectSortOrder={(sortOrder) =>
-            setGameQuery((prev) => ({ ...prev, sortOrder }))
-          }
-        />
+        <PlatformSelector />
+        <SortSelector />
       </div>
 
-      <GameGrid gameQuery={mergedGameQuery} />
+      <GameGrid />
     </div>
   );
 };

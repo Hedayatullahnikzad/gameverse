@@ -1,15 +1,14 @@
 import usePlatform from "../hooks/usePlatform";
-import type { GameQuery } from "../pages/MainLayout";
+import { useGameQueryStore } from "../store/useGameQueryStore";
 
-interface Props {
-  gameQuery: GameQuery;
-}
+const GameHeading = () => {
+  const platformId = useGameQueryStore((state) => state.gameQuery.platformId);
 
-const GameHeading = ({ gameQuery }: Props) => {
-  const platform = usePlatform(gameQuery.platformId);
-  const heading = `${platform?.name ?? ""} ${
-    gameQuery.genreName ?? ""
-  } Games`.trim();
+  const genreName = useGameQueryStore((state) => state.gameQuery.genreName);
+
+  const platform = usePlatform(platformId);
+
+  const heading = `${platform?.name ?? ""} ${genreName ?? ""} Games`.trim();
 
   return (
     <h1 className="text-4xl font-bold my-5 text-gray-900 dark:text-white">

@@ -1,26 +1,23 @@
 import { useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import usePlatforms from "../hooks/usePlatforms";
-import { type Platform } from "../entities/Platform";
-import usePlatform from "../hooks/usePlatform";
+import { useGameQueryStore } from "../store/useGameQueryStore";
 
-interface Props {
-  selectedPlatformId?: number;
-  onSelectPlatform: (platform: Platform) => void;
-}
-
-const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
+const PlatformSelector = () => {
   const [open, setOpen] = useState(false);
-  const { data, error } = usePlatforms();
+  const { data } = usePlatforms();
 
-  if (error) return null;
+  // ✅ Subscribe only to what we need
+  const platformName = useGameQueryStore(
+    (state) => state.gameQuery.platformName,
+  );
+
+  const setPlatform = useGameQueryStore((state) => state.setPlatform);
 
   const platforms = data?.results ?? [];
 
-  const selectedPlatform = usePlatform(selectedPlatformId);
-
   return (
-    <div className="relative inline-block text-left w-full sm:w-auto ">
+    <div className="relative inline-block text-left w-full sm:w-auto">
       {/* Button */}
       <button
         onClick={() => setOpen(!open)}
@@ -37,16 +34,19 @@ const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
           py-2
           text-xs
           font-medium
+          text-gray-900
+          bg-white
           hover:bg-gray-100
           dark:border-gray-600
           dark:text-white
+          dark:bg-gray-800
           dark:hover:bg-gray-700
           sm:px-4
           sm:text-sm
         "
       >
-        <span>{selectedPlatform?.name ?? "Platform"}</span>
-        <BsChevronDown className="shrink-0 text-gray-500" />
+        <span>{platformName ?? "Platform"}</span>
+        <BsChevronDown className="shrink-0 text-gray-500 dark:text-gray-300" />
       </button>
 
       {/* Dropdown */}
@@ -58,7 +58,7 @@ const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
             z-10
             mt-2
             w-full
-            sm:w-48
+            sm:w-56
             rounded-md
             border
             border-gray-200
@@ -73,7 +73,7 @@ const PlatformSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
               <li
                 key={platform.id}
                 onClick={() => {
-                  onSelectPlatform(platform);
+                  setPlatform(platform.id, platform.name);
                   setOpen(false);
                 }}
                 className="

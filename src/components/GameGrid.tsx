@@ -1,22 +1,18 @@
 import InfiniteScroll from "react-infinite-scroll-component";
-import type { GameQuery } from "../pages/MainLayout";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
+import { useGameQueryStore } from "../store/useGameQueryStore";
 
-interface Props {
-  gameQuery: GameQuery;
-}
+const GameGrid = () => {
+  // ✅ Selector instead of destructuring whole store
+  const gameQuery = useGameQueryStore((state) => state.gameQuery);
 
-const GameGrid = ({ gameQuery }: Props) => {
-  console.log("GameQuery:", gameQuery);
   const { data, error, isLoading, fetchNextPage, hasNextPage } =
     useGames(gameQuery);
 
   const skeletons = Array.from({ length: 6 });
-
-  // flatten pages
   const games = data?.pages.flatMap((page) => page.results) ?? [];
 
   if (error) return <p className="text-red-500">{error.message}</p>;
