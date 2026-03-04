@@ -17,6 +17,7 @@ interface GameQueryStore {
   setSortOrder: (order: string) => void;
   setSearchText: (text?: string) => void;
   resetFilters: () => void;
+  resetAndSearch: (text?: string) => void;
 }
 
 export const useGameQueryStore = create<GameQueryStore>((set) => ({
@@ -64,4 +65,11 @@ export const useGameQueryStore = create<GameQueryStore>((set) => ({
         sortOrder: "",
       },
     }),
+    resetAndSearch: (text?: string) =>
+  set({
+    gameQuery: {
+      sortOrder: "",
+      searchText: text,
+    },
+  }),
 }));

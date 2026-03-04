@@ -1,10 +1,11 @@
 import { BsSearch } from "react-icons/bs";
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useGameQueryStore } from "../store/useGameQueryStore";
 
 const SearchInput = () => {
   const searchRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
+
+  const resetAndSearch = useGameQueryStore((state) => state.resetAndSearch);
 
   return (
     <form
@@ -16,7 +17,8 @@ const SearchInput = () => {
         const searchText = searchRef.current.value.trim();
         if (!searchText) return;
 
-        navigate(`/?search=${searchText}`);
+        // 🔥 Directly update store (NO URL)
+        resetAndSearch(searchText);
       }}
       className="w-full ml-1"
     >
