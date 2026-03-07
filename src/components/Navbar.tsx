@@ -12,7 +12,7 @@ const Navbar = () => {
           <img
             src={logo}
             alt="logo"
-            className="w-[48px] h-[48px] flex-shrink-0 cursor-pointer  rounded-full "
+            className="w-[48px] h-[48px] flex-shrink-0 cursor-pointer  rounded-full ml-2 mr-2 "
           />
         </Link>
 
