@@ -5,14 +5,20 @@ import SortSelector from "../components/SortSelector";
 
 const HomePage = () => {
   return (
-    <div className="pl-2">
-      <GameHeading />
+    <div>
+      {/* 🔥 Header Section */}
+      <div className="flex flex-col gap-6 mb-10">
+        {/* Title */}
+        <GameHeading />
 
-      <div className="flex gap-5 mb-5">
-        <PlatformSelector />
-        <SortSelector />
+        {/* Controls */}
+        <div className="flex items-center gap-4">
+          <PlatformSelector />
+          <SortSelector />
+        </div>
       </div>
 
+      {/* Games Grid */}
       <GameGrid />
     </div>
   );

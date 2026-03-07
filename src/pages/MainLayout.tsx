@@ -11,7 +11,7 @@ const Layout = () => {
       className={
         isGameDetailsPage
           ? "min-h-screen bg-white dark:bg-gray-900"
-          : "grid grid-rows-[auto_1fr] lg:grid-cols-[200px_1fr] min-h-screen bg-white dark:bg-gray-900"
+          : "grid grid-rows-[auto_1fr] lg:grid-cols-[280px_1fr] min-h-screen bg-white dark:bg-gray-900"
       }
     >
       <div className={!isGameDetailsPage ? "lg:col-span-2" : ""}>
@@ -19,7 +19,7 @@ const Layout = () => {
       </div>
 
       {!isGameDetailsPage && (
-        <aside className="hidden lg:block px-2">
+        <aside className="hidden lg:block px-10">
           <GenreList />
         </aside>
       )}

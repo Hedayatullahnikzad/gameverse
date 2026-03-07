@@ -15,7 +15,7 @@ const GenreList = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+      <h2 className="text-2xl font-bold mb-3 mt-4 text-gray-900 dark:text-white">
         Genres
       </h2>
 

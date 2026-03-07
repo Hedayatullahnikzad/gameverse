@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.webp";
+import logo from "../assets/canva-game3.jpg";
 import ColorModeSwitch from "./ColorModeSwitch";
 import SearchInput from "./SearchInput ";
 
@@ -12,7 +12,7 @@ const Navbar = () => {
           <img
             src={logo}
             alt="logo"
-            className="w-[48px] h-[48px] flex-shrink-0 cursor-pointer"
+            className="w-[48px] h-[48px] flex-shrink-0 cursor-pointer  rounded-full "
           />
         </Link>
 
